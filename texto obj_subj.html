@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texto Objetivo vs. Subjetivo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: slideDown 0.8s ease-out;
+        }
+        
+        h1 {
+            font-size: 3.2rem;
+            color: #1a2a6c;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            color: #b21f1f;
+            font-weight: 500;
+        }
+        
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.4s, box-shadow 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+        
+        .card-title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .objective .card-title {
+            color: #1a2a6c;
+            border-color: #1a2a6c;
+        }
+        
+        .subjective .card-title {
+            color: #b21f1f;
+            border-color: #b21f1f;
+        }
+        
+        .card-content {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+        
+        .features {
+            margin: 25px 0;
+            padding-left: 20px;
+        }
+        
+        .features li {
+            margin-bottom: 12px;
+            padding-left: 10px;
+            position: relative;
+        }
+        
+        .features li:before {
+            content: "•";
+            position: absolute;
+            left: -15px;
+            font-size: 1.4rem;
+        }
+        
+        .objective .features li:before {
+            color: #1a2a6c;
+        }
+        
+        .subjective .features li:before {
+            color: #b21f1f;
+        }
+        
+        .example {
+            background: rgba(0, 0, 0, 0.03);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 4px solid;
+        }
+        
+        .objective .example {
+            border-color: #1a2a6c;
+        }
+        
+        .subjective .example {
+            border-color: #b21f1f;
+        }
+        
+        .example-title {
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .comparison-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        
+        .comparison-title {
+            font-size: 2.5rem;
+            color: #1a2a6c;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .comparison-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .comparison-box {
+            flex: 1;
+            min-width: 300px;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .objective-box {
+            background: rgba(26, 42, 108, 0.1);
+            border: 2px solid #1a2a6c;
+        }
+        
+        .subjective-box {
+            background: rgba(178, 31, 31, 0.1);
+            border: 2px solid #b21f1f;
+        }
+        
+        .comparison-box h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .quiz-title {
+            font-size: 2.2rem;
+            color: #1a2a6c;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .quiz-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .quiz-question {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.03);
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .option {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f0f0f0;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .option:hover {
+            transform: scale(1.03);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .option.objective {
+            border: 2px solid #1a2a6c;
+        }
+        
+        .option.subjective {
+            border: 2px solid #b21f1f;
+        }
+        
+        .option.selected {
+            background: #1a2a6c;
+            color: white;
+        }
+        
+        .option.subjective.selected {
+            background: #b21f1f;
+        }
+        
+        .result {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            display: none;
+        }
+        
+        .result.correct {
+            background: rgba(46, 204, 113, 0.2);
+            border: 2px solid #2ecc71;
+        }
+        
+        .result.incorrect {
+            background: rgba(231, 76, 60, 0.2);
+            border: 2px solid #e74c3c;
+        }
+        
+        .result-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .conclusion {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        
+        .conclusion-title {
+            font-size: 2.5rem;
+            color: #1a2a6c;
+            margin-bottom: 20px;
+        }
+        
+        .conclusion-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #1a2a6c, #b21f1f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+        
+        .surprise {
+            text-align: center;
+            margin: 40px 0;
+            animation: pulse 2s infinite;
+        }
+        
+        .surprise-box {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px 40px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+        
+        .surprise-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .surprise-content {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            font-size: 1.1rem;
+            margin-top: 40px;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .icon-large {
+            font-size: 2.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .card-container {
+                flex-direction: column;
+            }
+            
+            .card {
+                width: 100%;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .card-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-book-open"></i> Texto Objetivo vs. Texto Subjetivo</h1>
+            <p class="subtitle">Aprende a distinguir estes dois conceitos fundamentais de forma divertida!</p>
+        </header>
+        
+        <div class="card-container">
+            <div class="card objective">
+                <h2 class="card-title"><i class="fas fa-binoculars"></i> Texto Objetivo</h2>
+                <div class="card-content">
+                    <p>O texto objetivo apresenta informações de forma neutra, factual e imparcial, sem expressar opiniões pessoais ou sentimentos.</p>
+                    
+                    <h3>Características principais:</h3>
+                    <ul class="features">
+                        <li>Baseado em <strong>factos verificáveis</strong></li>
+                        <li>Linguagem <strong>neutra e impessoal</strong></li>
+                        <li>Foca-se em <strong>informações concretas</strong></li>
+                        <li>Não expressa opiniões ou emoções</li>
+                        <li>Utiliza uma linguagem <strong>clara e direta</strong></li>
+                    </ul>
+                    
+                    <div class="example">
+                        <div class="example-title">Exemplo:</div>
+                        <p>"O Museu Nacional do Azulejo está localizado em Lisboa e alberga uma coleção de azulejos que abrange cinco séculos. Foi fundado em 1965 e recebe anualmente cerca de 200.000 visitantes."</p>
+                    </div>
+                    
+                    <p><strong>Quando usar?</strong> Textos científicos, notícias jornalísticas, relatórios técnicos, manuais de instruções, artigos enciclopédicos.</p>
+                </div>
+            </div>
+            
+            <div class="card subjective">
+                <h2 class="card-title"><i class="fas fa-heart"></i> Texto Subjetivo</h2>
+                <div class="card-content">
+                    <p>O texto subjetivo expressa opiniões, sentimentos, impressões e interpretações pessoais do autor sobre um tema.</p>
+                    
+                    <h3>Características principais:</h3>
+                    <ul class="features">
+                        <li>Baseado em <strong>opiniões e sentimentos</strong></li>
+                        <li>Linguagem <strong>pessoal e emocional</strong></li>
+                        <li>Utiliza <strong>adjetivos valorativos</strong></li>
+                        <li>Reflete a <strong>perspetiva individual</strong> do autor</li>
+                        <li>Pode ser <strong>persuasivo</strong> ou <strong>expressivo</strong></li>
+                    </ul>
+                    
+                    <div class="example">
+                        <div class="example-title">Exemplo:</div>
+                        <p>"Visitar o Museu Nacional do Azulejo foi uma experiência absolutamente fascinante! As impressionantes obras de arte, cheias de cor e história, transportaram-me para outras épocas. Recomendo vivamente esta visita única que nos enche de orgulho na nossa cultura."</p>
+                    </div>
+                    
+                    <p><strong>Quando usar?</strong> Críticas de arte, textos literários, diários pessoais, opiniões em jornais, textos publicitários, redes sociais.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="comparison-section">
+            <h2 class="comparison-title"><i class="fas fa-balance-scale"></i> Comparação Direta</h2>
+            <div class="comparison-content">
+                <div class="comparison-box objective-box">
+                    <h3><i class="fas fa-ruler"></i> Objetivo</h3>
+                    <p>"A temperatura máxima hoje foi de 28°C."</p>
+                    <p>"O livro tem 250 páginas."</p>
+                    <p>"Portugal venceu o jogo por 2-1."</p>
+                    <p>"O filme tem duração de 120 minutos."</p>
+                </div>
+                
+                <div class="comparison-box subjective-box">
+                    <h3><i class="fas fa-smile"></i> Subjetivo</h3>
+                    <p>"Hoje está um calor insuportável!"</p>
+                    <p>"Este livro é incrivelmente emocionante."</p>
+                    <p>"A equipa jogou de forma espetacular!"</p>
+                    <p>"O filme foi aborrecido e demasiado longo."</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="quiz-section">
+            <h2 class="quiz-title"><i class="fas fa-puzzle-piece"></i> Testa os Teus Conhecimentos</h2>
+            <div class="quiz-content">
+                <div class="quiz-question">
+                    <div class="question-text">1. "O Oceanário de Lisboa é um dos maiores aquários da Europa e abriga mais de 8.000 criaturas marinhas."</div>
+                    <div class="options">
+                        <div class="option objective" onclick="selectOption(this, 1)">Objetivo</div>
+                        <div class="option subjective" onclick="selectOption(this, 1)">Subjetivo</div>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <div class="question-text">2. "A praia da Nazaré tem as ondas mais incríveis do mundo! É simplesmente arrepiante ver os surfistas a enfrentar aqueles monstros de água."</div>
+                    <div class="options">
+                        <div class="option objective" onclick="selectOption(this, 2)">Objetivo</div>
+                        <div class="option subjective" onclick="selectOption(this, 2)">Subjetivo</div>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <div class="question-text">3. "A Universidade de Coimbra, fundada em 1290, é uma das universidades mais antigas do mundo ainda em operação."</div>
+                    <div class="options">
+                        <div class="option objective" onclick="selectOption(this, 3)">Objetivo</div>
+                        <div class="option subjective" onclick="selectOption(this, 3)">Subjetivo</div>
+                    </div>
+                </div>
+                
+                <div class="quiz-question">
+                    <div class="question-text">4. "Acredito que o fado é a expressão musical mais bela e comovente que já ouvi, capaz de tocar a alma de qualquer pessoa."</div>
+                    <div class="options">
+                        <div class="option objective" onclick="selectOption(this, 4)">Objetivo</div>
+                        <div class="option subjective" onclick="selectOption(this, 4)">Subjetivo</div>
+                    </div>
+                </div>
+                
+                <button class="submit-btn" onclick="checkAnswers()">Verificar Respostas</button>
+                
+                <div class="result" id="result">
+                    <h3 class="result-title" id="result-title"></h3>
+                    <p id="result-message"></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="surprise" onclick="toggleSurprise()">
+            <div class="surprise-box">
+                <i class="fas fa-gift icon-large"></i>
+                <h3>Surpresa Especial!</h3>
+                <p>Clique para descobrir</p>
+            </div>
+            
+            <div class="surprise-content" id="surprise-content">
+                <h3><i class="fas fa-lightbulb"></i> Sabias que...?</h3>
+                <p>Muitas vezes, os melhores textos combinam elementos objetivos e subjetivos!</p>
+                <p>Por exemplo, num artigo de opinião sobre alterações climáticas:</p>
+                <div class="example" style="text-align: left;">
+                    <p>"Os dados científicos mostram que a temperatura global aumentou 1.1°C desde a era pré-industrial (facto objetivo). Na minha perspetiva, é assustador pensar nas consequências que as próximas gerações vão enfrentar se não agirmos agora (opinião subjetiva)."</p>
+                </div>
+                <p>Esta combinação permite apresentar informações credíveis enquanto expressa uma posição pessoal!</p>
+            </div>
+        </div>
+        
+        <div class="conclusion">
+            <h2 class="conclusion-title"><i class="fas fa-flag-checkered"></i> Conclusão</h2>
+            <div class="conclusion-content">
+                <p>Dominar a diferença entre texto <span class="highlight">objetivo</span> e <span class="highlight">subjetivo</span> é fundamental para:</p>
+                <ul class="features" style="text-align: left; margin: 20px auto; max-width: 600px;">
+                    <li>Interpretar corretamente diferentes tipos de textos</li>
+                    <li>Desenvolver o pensamento crítico</li>
+                    <li>Adaptar a tua escrita a diferentes contextos</li>
+                    <li>Reconhecer factos de opiniões nas notícias</li>
+                    <li>Comunicar de forma mais eficaz</li>
+                </ul>
+                <p>Lembra-te: ambos têm o seu lugar! O importante é saber quando e como usar cada um.</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Criado com ❤️ para alunos portugueses | Aprende a dominar a língua portuguesa!</p>
+            <p>© 2023 Texto Objetivo vs. Subjetivo | Ferramenta Educacional Interativa</p>
+        </footer>
+    </div>
+    
+    <script>
+        function selectOption(element, question) {
+            // Remove selected class from all options in this question
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            // Add selected class to clicked option
+            element.classList.add('selected');
+            
+            // Store the answer
+            element.dataset.selected = true;
+        }
+        
+        function checkAnswers() {
+            const answers = {
+                1: 'objective',
+                2: 'subjective',
+                3: 'objective',
+                4: 'subjective'
+            };
+            
+            let correctCount = 0;
+            
+            // Check each question
+            for (let i = 1; i <= 4; i++) {
+                const selectedOption = document.querySelector(`.quiz-question:nth-child(${i}) .option.selected`);
+                
+                if (selectedOption) {
+                    const isCorrect = selectedOption.classList.contains(answers[i]);
+                    
+                    if (isCorrect) {
+                        selectedOption.style.backgroundColor = '#2ecc71';
+                        selectedOption.style.color = 'white';
+                        correctCount++;
+                    } else {
+                        selectedOption.style.backgroundColor = '#e74c3c';
+                        selectedOption.style.color = 'white';
+                        
+                        // Highlight correct answer
+                        const correctOption = document.querySelector(`.quiz-question:nth-child(${i}) .option.${answers[i]}`);
+                        correctOption.style.backgroundColor = '#2ecc71';
+                        correctOption.style.color = 'white';
+                    }
+                }
+            }
+            
+            // Show result
+            const resultElement = document.getElementById('result');
+            const resultTitle = document.getElementById('result-title');
+            const resultMessage = document.getElementById('result-message');
+            
+            resultElement.style.display = 'block';
+            
+            if (correctCount === 4) {
+                resultElement.className = 'result correct';
+                resultTitle.innerHTML = '<i class="fas fa-trophy"></i> Parabéns!';
+                resultMessage.textContent = 'Acertaste todas as respostas! Dominas perfeitamente a diferença entre texto objetivo e subjetivo.';
+            } else if (correctCount >= 2) {
+                resultElement.className = 'result correct';
+                resultTitle.innerHTML = '<i class="fas fa-thumbs-up"></i> Bom trabalho!';
+                resultMessage.textContent = `Acertaste ${correctCount} de 4 perguntas. Estás no bom caminho, mas podes melhorar!`;
+            } else {
+                resultElement.className = 'result incorrect';
+                resultTitle.innerHTML = '<i class="fas fa-lightbulb"></i> Continua a praticar!';
+                resultMessage.textContent = `Acertaste ${correctCount} de 4 perguntas. Revê as diferenças e tenta novamente!`;
+            }
+            
+            // Scroll to results
+            resultElement.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function toggleSurprise() {
+            const surpriseContent = document.getElementById('surprise-content');
+            surpriseContent.style.display = surpriseContent.style.display === 'block' ? 'none' : 'block';
+        }
+        
+        // Initialize with some animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 300 + index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
